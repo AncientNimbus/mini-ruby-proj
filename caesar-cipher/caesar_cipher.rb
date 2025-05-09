@@ -3,13 +3,15 @@
 ALPHABETS = 'abcdefghijklmnopqrstuvwxyz'
 
 def shift_character(char, shift = 0)
-  # Helper methods to shift character space
+  # Helper methods: Shift character space
   # char {string} - single character
   # shift {number} - shift factor
   char = char.downcase
-  # ALPHABETS.chars.index { |ref_char| ref_char == char }
-  # char
-  char.swapcase
+  char_pos = ALPHABETS.chars.index { |ref_char| ref_char == char }
+  new_char_pos = (char_pos + shift) % ALPHABETS.length
+  new_char = ALPHABETS[new_char_pos]
+  puts "New: #{new_char}"
+  new_char
 end
 
 def caesar_cipher(str, shift = 0)
@@ -18,15 +20,14 @@ def caesar_cipher(str, shift = 0)
   str_arr = str.chars.map do |char|
     if ALPHABETS.include?(char.downcase)
       new_char = shift_character(char, shift)
-      char == char.upcase ? new_char.swapcase : new_char
+      char == char.upcase ? new_char.upcase : new_char
     else
       # preserve punctuation and whitespace
       char
     end
   end
+  puts "String: #{str}, Shift: #{shift} \nExpected result:"
   str_arr.join('')
-  # puts "String: #{str}, Shift: #{shift} \nExpected result:"
-  # 'Bmfy f xywnsl!'
 end
 
-puts caesar_cipher('What a string!', 5)
+# puts caesar_cipher('What a string!', 5)
