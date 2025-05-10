@@ -8,7 +8,7 @@ INTRO = <<~INTRO
    |___|~~~~~~~~~~~~~~~|___|
   (_____)             (_____)
   -=-._.-=-._.-=-._.-=-._.-=-
-    v1.5: By Ancient Nimbus
+    v1.6: By Ancient Nimbus
   -=-._.-=-._.-=-._.-=-._.-=-
 
   Let's get started...
@@ -20,9 +20,9 @@ INTRO = <<~INTRO
   Type 'exit' to quit the program at any point.
 INTRO
 STEPS = {
-  1 => { re: /\A[1-2]\z/, prompt_msg: 'Please provide a mode number (1 or 2)...' },
-  2 => { re: /.*/, prompt_msg: 'Please provide a message...' },
-  3 => { re: /\A[0-9]*\z/, prompt_msg: 'Enter a number to set the character shift...' }
+  mode: { re: /\A[1-2]\z/, prompt_msg: 'Please provide a mode number (1 or 2)...' },
+  msg: { re: /.*/, prompt_msg: 'Please provide a message...' },
+  shift: { re: /\A[0-9]*\z/, prompt_msg: 'Enter a number to set the character shift...' }
 }.freeze
 at_exit { puts "\nThank you for using the Cipher. :)" }
 
@@ -48,7 +48,7 @@ def caesar_cipher(str, shift = 0)
       char
     end
   end
-  str_arr.join('')
+  str_arr.join
 end
 
 def get_input(regex, prompt_msg)
@@ -67,9 +67,9 @@ end
 def user_input
   user_input_data = { mode: 0, msg: '', shift: nil }
 
-  user_input_data[:mode] = get_input(STEPS.dig(1, :re), STEPS.dig(1, :prompt_msg)).to_i
-  user_input_data[:msg] = get_input(STEPS.dig(2, :re), STEPS.dig(2, :prompt_msg))
-  user_input_data[:shift] = get_input(STEPS.dig(3, :re), STEPS.dig(3, :prompt_msg)).to_i
+  user_input_data[:mode] = get_input(STEPS.dig(:mode, :re), STEPS.dig(:mode, :prompt_msg)).to_i
+  user_input_data[:msg] = get_input(STEPS.dig(:msg, :re), STEPS.dig(:msg, :prompt_msg))
+  user_input_data[:shift] = get_input(STEPS.dig(:shift, :re), STEPS.dig(:shift, :prompt_msg)).to_i
 
   user_input_data
 end
