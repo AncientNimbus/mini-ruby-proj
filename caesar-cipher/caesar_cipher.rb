@@ -29,7 +29,7 @@ def shift_character(char, shift = 0)
   # char {string} - single character
   # shift {number} - shift factor
   char = char.downcase
-  char_pos = ALPHABETS.chars.index { |ref_char| ref_char == char }
+  char_pos = ALPHABETS.index(char.downcase)
   new_char_pos = (char_pos + shift) % ALPHABETS.length
   ALPHABETS[new_char_pos]
 end
