@@ -8,7 +8,7 @@ INTRO = <<~INTRO
    |___|~~~~~~~~~~~~~~~|___|
   (_____)             (_____)
   -=-._.-=-._.-=-._.-=-._.-=-
-    v1.4: By Ancient Nimbus
+    v1.5: By Ancient Nimbus
   -=-._.-=-._.-=-._.-=-._.-=-
 
   Let's get started...
@@ -17,12 +17,14 @@ INTRO = <<~INTRO
   1) Encrypt
   2) Decrypt
 
+  Type 'exit' to quit the program at any point.
 INTRO
 STEPS = {
   1 => { re: /\A[1-2]\z/, prompt_msg: 'Please provide a mode number (1 or 2)...' },
   2 => { re: /.*/, prompt_msg: 'Please provide a message...' },
   3 => { re: /\A[0-9]*\z/, prompt_msg: 'Enter a number to set the character shift...' }
 }.freeze
+at_exit { puts "\nThank you for using the Cipher. :)" }
 
 def shift_character(char, shift = 0)
   # Helper methods: Shift character space
@@ -56,6 +58,8 @@ def get_input(regex, prompt_msg)
   until input_value =~ regex && input_value.empty? == false
     puts "\n* #{prompt_msg}"
     input_value = gets.chomp
+    # Keyword to quit the program early
+    exit if input_value == 'exit'
   end
   input_value
 end
