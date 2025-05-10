@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ALPHABETS = 'abcdefghijklmnopqrstuvwxyz'
+ALPHABETS = [*'a'..'z'].freeze
 INTRO = <<~INTRO
   ( ___ )             ( ___ )
    |   |~~~~~~~~~~~~~~~|   |
@@ -8,7 +8,7 @@ INTRO = <<~INTRO
    |___|~~~~~~~~~~~~~~~|___|
   (_____)             (_____)
   -=-._.-=-._.-=-._.-=-._.-=-
-    v1.6: By Ancient Nimbus
+    v1.7: By Ancient Nimbus
   -=-._.-=-._.-=-._.-=-._.-=-
 
   Let's get started...
