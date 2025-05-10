@@ -60,25 +60,26 @@ def get_input(regex, prompt_msg)
   input_value
 end
 
-def main
-  user_input = { mode: 0, msg: '', shift: nil }
+def user_input
+  user_input_data = { mode: 0, msg: '', shift: nil }
 
-  puts INTRO
+  user_input_data[:mode] = get_input(STEPS.dig(1, :re), STEPS.dig(1, :prompt_msg)).to_i
+  user_input_data[:msg] = get_input(STEPS.dig(2, :re), STEPS.dig(2, :prompt_msg))
+  user_input_data[:shift] = get_input(STEPS.dig(3, :re), STEPS.dig(3, :prompt_msg)).to_i
 
-  user_input[:mode] = get_input(STEPS.dig(1, :re), STEPS.dig(1, :prompt_msg))
-  user_input[:msg] = get_input(STEPS.dig(2, :re), STEPS.dig(2, :prompt_msg))
-  user_input[:shift] = get_input(STEPS.dig(3, :re), STEPS.dig(3, :prompt_msg))
-
-  msg = user_input[:msg]
-  shift = user_input[:shift].to_i
-  if user_input[:mode] == '1'
-    caesar_cipher(msg, shift)
-  else
-    caesar_cipher(msg, shift * -1)
-  end
+  user_input_data
 end
 
-puts main
+def main
+  puts INTRO
 
-# puts caesar_cipher('What a string!', 5)
-# puts caesar_cipher('Bmfy f xywnsl!', -5)
+  user_input_data = user_input
+  mode, msg, shift = user_input_data.values_at(:mode, :msg, :shift)
+
+  new_msg = mode == 1 ? caesar_cipher(msg, shift) : caesar_cipher(msg, -shift)
+
+  puts "\nYour #{mode == 1 ? 'encrypted' : 'decrypted'} message: #{new_msg}"
+  new_msg
+end
+
+main
