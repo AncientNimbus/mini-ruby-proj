@@ -1,6 +1,28 @@
 # frozen_string_literal: true
 
 ALPHABETS = 'abcdefghijklmnopqrstuvwxyz'
+INTRO = <<~INTRO
+  ( ___ )             ( ___ )
+   |   |~~~~~~~~~~~~~~~|   |
+   |   | CAESAR CIPHER |   |
+   |___|~~~~~~~~~~~~~~~|___|
+  (_____)             (_____)
+  -=-._.-=-._.-=-._.-=-._.-=-
+    v1.0: By Ancient Nimbus
+  -=-._.-=-._.-=-._.-=-._.-=-
+
+  Let's get started...
+
+  Mode selection:
+  1) Encrypt
+  2) Decrypt
+
+INTRO
+STEPS = {
+  1 => { re: /\A[1-2]\z/, prompt_msg: 'Please provide a mode number (1 or 2)...' },
+  2 => { re: /.*/, prompt_msg: 'Please provide a message...' },
+  3 => { re: /\A[0-9]*\z/, prompt_msg: 'Enter a number to set the character shift...' }
+}.freeze
 
 def shift_character(char, shift = 0)
   # Helper methods: Shift character space
@@ -9,9 +31,7 @@ def shift_character(char, shift = 0)
   char = char.downcase
   char_pos = ALPHABETS.chars.index { |ref_char| ref_char == char }
   new_char_pos = (char_pos + shift) % ALPHABETS.length
-  new_char = ALPHABETS[new_char_pos]
-  puts "New: #{new_char}"
-  new_char
+  ALPHABETS[new_char_pos]
 end
 
 def caesar_cipher(str, shift = 0)
@@ -26,8 +46,39 @@ def caesar_cipher(str, shift = 0)
       char
     end
   end
-  puts "String: #{str}, Shift: #{shift} \nExpected result:"
   str_arr.join('')
 end
 
+def get_input(regex, prompt_msg)
+  # regex {regex}
+  # prompt_msg {string}
+  input_value = ''
+  until input_value =~ regex && input_value.empty? == false
+    puts "\n* #{prompt_msg}"
+    input_value = gets.chomp
+  end
+  input_value
+end
+
+def main
+  user_input = { mode: 0, msg: '', shift: nil }
+
+  puts INTRO
+
+  user_input[:mode] = get_input(STEPS.dig(1, :re), STEPS.dig(1, :prompt_msg))
+  user_input[:msg] = get_input(STEPS.dig(2, :re), STEPS.dig(2, :prompt_msg))
+  user_input[:shift] = get_input(STEPS.dig(3, :re), STEPS.dig(3, :prompt_msg))
+
+  msg = user_input[:msg]
+  shift = user_input[:shift].to_i
+  if user_input[:mode] == '1'
+    caesar_cipher(msg, shift)
+  else
+    caesar_cipher(msg, shift * -1)
+  end
+end
+
+puts main
+
 # puts caesar_cipher('What a string!', 5)
+# puts caesar_cipher('Bmfy f xywnsl!', -5)
