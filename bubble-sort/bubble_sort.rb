@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop: disable Metrics/AbcSize
 def bubble_sort(arr)
   n = arr.length
 
@@ -7,7 +8,7 @@ def bubble_sort(arr)
     swapped = false
 
     (0...n - 1 - pass).each do |i|
-      if arr[i] > arr [i + 1]
+      if arr[i] > arr[i + 1]
         arr[i], arr[i + 1] = arr[i + 1], arr[i]
         swapped = true
       end
@@ -16,6 +17,7 @@ def bubble_sort(arr)
   end
   arr
 end
+# rubocop: enable Metrics/AbcSize
 
 # to_sort = [4, 3, 78, 2, 0, 2]
 # p bubble_sort(to_sort)

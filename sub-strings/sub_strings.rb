@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def substrings(str, dict_arr)
   count_word = Hash.new(0)
   str = str.downcase
