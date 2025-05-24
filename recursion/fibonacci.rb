@@ -6,16 +6,12 @@ module Fibonacci
     # Fibonacci Iterative ver.
     # @param num [Integer] number of elements to return
     # @return [Array: Integer] fibonacci sequence array
-    # @version 1.0.1
+    # @version 1.0.2
     def fibs(num)
-      arr = [0, 1]
-      return [0] if num.zero?
-      return arr if num == 1
+      return if num.zero?
+      return [0] if num == 1
 
-      # Using times loop
-      # (num - 2).times do
-      #   arr << (arr[-1] + arr[-2])
-      # end
+      arr = [0, 1]
       arr << (arr[-1] + arr[-2]) while arr.size < num
       arr
     end
@@ -25,6 +21,12 @@ module Fibonacci
     # @return [Array: Integer] fibonacci sequence array
     # @version 1.0.0
     def fibs_rec(num)
+      return if num.zero?
+      return [0] if num == 1
+
+      arr = [0, 1]
+      return arr if num == 1
+
       puts "Fibonacci recursive ver. Expected outcome: Fibs: #{num} = [0, 1, 1, 2, 3, 5, 8, 13]"
     end
   end
@@ -40,5 +42,5 @@ def debug(num, ver: 1)
   puts seq.inspect
 end
 
-debug(8)
+debug(2)
 # debug(8, ver: 2)
