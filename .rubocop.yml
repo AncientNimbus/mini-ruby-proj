@@ -12,3 +12,9 @@ require: rubocop-performance
 
 AllCops:
   NewCops: enable
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always_true
+
+Metrics/MethodLength:
+  CountAsOne: ["array", "hash", "heredoc", "method_call"]
