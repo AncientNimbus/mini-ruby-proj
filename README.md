@@ -21,6 +21,7 @@
 ## 5. [Recursion](https://github.com/AncientNimbus/mini-ruby-proj/tree/main/recursion)
 
 - Fibonacci Sequence
+- Merge Sort
 
 
 
