@@ -5,7 +5,7 @@ module Fibonacci
   class << self
     # Fibonacci Iterative ver.
     # @param num [Integer] number of elements to return
-    # @return [Array: Integer] fibonacci sequence array
+    # @return [Array<Integer>] fibonacci sequence array
     # @version 1.0.4
     def fibs(num)
       return [] if num.zero?
@@ -20,7 +20,7 @@ module Fibonacci
 
     # Fibonacci Recursive ver.
     # @param num [Integer] number of elements to return
-    # @return [Array: Integer] fibonacci sequence array
+    # @return [Array<Integer>] fibonacci sequence array
     # @version 1.0.0
     def fibs_rec(num)
       return [] if num.zero?
@@ -39,11 +39,11 @@ end
 F = Fibonacci
 
 # Debug
-def debug(num, ver: 1)
-  seq = ver == 1 ? F.fibs(num) : F.fibs_rec(num)
-  puts seq.class
-  puts seq.inspect
-end
+# def debug(num, ver: 1)
+#   seq = ver == 1 ? F.fibs(num) : F.fibs_rec(num)
+#   puts seq.class
+#   puts seq.inspect
+# end
 
-debug(8)
-debug(8, ver: 2)
+# debug(8)
+# debug(8, ver: 2)
