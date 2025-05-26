@@ -4,7 +4,7 @@ require_relative 'node'
 
 module LinkedList
   # Linked List Class
-  # @version 1.0.2
+  # @version 1.0.3
   class LinkedList
     attr_accessor :head, :tail
 
@@ -37,8 +37,8 @@ module LinkedList
       head.next_node = old_head
     end
 
-    # @todo #size
     # Returns the total number of nodes in the list
+    # @return [Integer] total number of nodes
     # @since 1.0.2
     # @version 1.0.0
     def size
@@ -52,8 +52,27 @@ module LinkedList
       end
       count
     end
-    # @todo #head
-    # @todo #tail
+
+    # Returns the first node in the list
+    # @return [LinkedList::Node] a node object
+    # @since 1.0.3
+    # @version 1.0.0
+    def head_node
+      head
+    end
+
+    # Returns the first node in the list
+    # @return [LinkedList::Node] a node object
+    # @since 1.0.3
+    # @version 1.0.0
+    def tail_node
+      return nil if head.nil?
+
+      current = head
+      current = current.next_node until current.next_node.nil?
+      current
+    end
+
     # @todo #at(index)
     # @todo #pop
     # @todo #contains?(value)

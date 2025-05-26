@@ -14,5 +14,6 @@ list.prepend('bean')
 list.prepend('toast')
 
 # p list.head
-p list.size
+p list.head
+p list.tail_node
 # puts list.to_s
