@@ -159,6 +159,7 @@ module LinkedList
     end
 
     # Inserts a new node with the provided `value` at the given `index`
+    # On this iteration, index larger than current list size will result node being at add at the end
     # @param value [Object] a value for the node
     # @param index [Integer] node position to insert
     # @since 1.0.8
