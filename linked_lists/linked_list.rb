@@ -4,7 +4,7 @@ require_relative 'node'
 
 module LinkedList
   # Linked List Class
-  # @version 1.0.4
+  # @version 1.0.5
   class LinkedList
     attr_accessor :head
 
@@ -52,7 +52,7 @@ module LinkedList
     end
 
     # Returns the first node in the list
-    # @return [LinkedList::Node] a node object
+    # @return [LinkedList::Node, nil] a node object or `nil` if the list empty
     # @since 1.0.3
     # @version 1.0.0
     def head_node
@@ -60,7 +60,7 @@ module LinkedList
     end
 
     # Returns the first node in the list
-    # @return [LinkedList::Node] a node object
+    # @return [LinkedList::Node, nil] a node object or `nil` if the list is empty
     # @since 1.0.3
     # @version 1.0.1
     def tail_node
@@ -71,7 +71,7 @@ module LinkedList
 
     # Returns the node at the given `index`
     # @param index [Integer] node position
-    # @return [LinkedList::Node] a node object
+    # @return [LinkedList::Node, nil] a node object or `nil` if list is empty or index is out of bound
     # @since 1.0.4
     # @version 1.0.0
     def at(index)
@@ -90,7 +90,7 @@ module LinkedList
     end
 
     # Removes the last element from the list
-    # @return [LinkedList::Node] a node object
+    # @return [LinkedList::Node, nil] a node object or `nil` if the list is empty
     # @since 1.0.4
     # @version 1.0.0
     def pop
@@ -105,7 +105,21 @@ module LinkedList
       current == head ? self.head = nil : second_last.next_node = nil
       current
     end
-    # @todo #contains?(value)
+
+    # Returns true if the passed in value is in the list and otherwise returns false
+    # @return [Boolean] whether the value is in the list
+    # @since 1.0.5
+    # @version 1.0.0
+    def contains?(value)
+      return false if head.nil?
+
+      current = head
+      return true if current.value == value
+
+      current = current.next_node until current.next_node.nil? || current.value == value
+      current.value == value
+    end
+
     # @todo #find(value)
     # @todo #to_s
     # @todo #insert_at(value, index)
