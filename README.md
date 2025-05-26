@@ -25,7 +25,7 @@
 
 ## 6. [Linked list](https://github.com/AncientNimbus/mini-ruby-proj/tree/main/linked-lists)
 
-## 7. [Hashed Map](https://github.com/AncientNimbus/mini-ruby-proj/tree/main/hash-map)
+## 7. [Hash Map](https://github.com/AncientNimbus/mini-ruby-proj/tree/main/hash-map)
 
 ## Additional info
 
