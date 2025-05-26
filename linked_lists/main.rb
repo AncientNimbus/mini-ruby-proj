@@ -15,5 +15,6 @@ list.prepend('toast')
 
 # p list.head
 p list.head
-p list.tail_node
+p list.pop
+# p list.tail_node
 # puts list.to_s

@@ -4,26 +4,24 @@ require_relative 'node'
 
 module LinkedList
   # Linked List Class
-  # @version 1.0.3
+  # @version 1.0.4
   class LinkedList
-    attr_accessor :head, :tail
+    attr_accessor :head
 
     # @since 1.0.0
-    # @version 1.0.0
-    def initialize(head = nil, tail = nil)
+    # @version 1.0.1
+    def initialize(head = nil)
       @head = head
-      @tail = tail
     end
 
     # Adds a new node containing `value` to the end of the list
     # @since 1.0.0
-    # @version 1.0.0
+    # @version 1.0.1
     def append(value)
       if head.nil?
         self.head = Node.new(value)
       else
-        current = head
-        current = current.next_node until current.next_node.nil?
+        current = traversal
         current.next_node = Node.new(value)
       end
     end
@@ -64,22 +62,65 @@ module LinkedList
     # Returns the first node in the list
     # @return [LinkedList::Node] a node object
     # @since 1.0.3
-    # @version 1.0.0
+    # @version 1.0.1
     def tail_node
       return nil if head.nil?
 
-      current = head
-      current = current.next_node until current.next_node.nil?
-      current
+      traversal
     end
 
-    # @todo #at(index)
-    # @todo #pop
+    # Returns the node at the given `index`
+    # @param index [Integer] node position
+    # @return [LinkedList::Node] a node object
+    # @since 1.0.4
+    # @version 1.0.0
+    def at(index)
+      return nil if head.nil?
+      return head if index.zero?
+
+      count = 0
+      current = head
+      until current.next_node.nil? || count == index
+        current = current.next_node
+        count += 1
+      end
+      return current if count == index
+
+      nil
+    end
+
+    # Removes the last element from the list
+    # @return [LinkedList::Node] a node object
+    # @since 1.0.4
+    # @version 1.0.0
+    def pop
+      return nil if head.nil?
+
+      current = head
+      second_last = nil
+      until current.next_node.nil?
+        second_last = current
+        current = current.next_node
+      end
+      current == head ? self.head = nil : second_last.next_node = nil
+      current
+    end
     # @todo #contains?(value)
     # @todo #find(value)
     # @todo #to_s
     # @todo #insert_at(value, index)
     # @todo #remove_at(index)
+
+    private
+
+    # Returns the current(last) elements in the list
+    # @since 1.0.4
+    # @version 1.0.0
+    def traversal
+      current = head
+      current = current.next_node until current.next_node.nil?
+      current
+    end
   end
 end
 
