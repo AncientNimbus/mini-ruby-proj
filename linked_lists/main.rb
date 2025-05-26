@@ -16,7 +16,7 @@ list.prepend('toast')
 # p list.head
 # p list.head
 # p list.to_s
-list.insert_at('Shiba Inu', 2)
+list.insert_at('Shiba Inu', 20)
 p list.to_s
 list.remove_at(8)
 p list.to_s

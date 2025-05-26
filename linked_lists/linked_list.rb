@@ -15,7 +15,7 @@ module LinkedList
     end
 
     # Adds a new node containing `value` to the end of the list
-    # @param value [LinkedList::Node] a node object
+    # @param value [Object] a value for the node
     # @since 1.0.0
     # @version 1.0.1
     def append(value)
@@ -28,7 +28,7 @@ module LinkedList
     end
 
     # Adds a new node containing `value` to the start of the list
-    # @param value [LinkedList::Node] a node object
+    # @param value [Object] a value for the node
     # @since 1.0.1
     # @version 1.0.0
     def prepend(value)
@@ -61,7 +61,7 @@ module LinkedList
       head
     end
 
-    # Returns the first node in the list
+    # Returns the tail node in the list
     # @return [LinkedList::Node, nil] a node object or `nil` if the list is empty
     # @since 1.0.3
     # @version 1.0.1
@@ -159,7 +159,7 @@ module LinkedList
     end
 
     # Inserts a new node with the provided `value` at the given `index`
-    # @param value [LinkedList::Node] a node object
+    # @param value [Object] a value for the node
     # @param index [Integer] node position to insert
     # @since 1.0.8
     # @version 1.0.0
