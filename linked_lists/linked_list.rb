@@ -4,7 +4,7 @@ require_relative 'node'
 
 module LinkedList
   # Linked List Class
-  # @version 1.0.6
+  # @version 1.0.7
   class LinkedList
     attr_accessor :head
 
@@ -140,7 +140,22 @@ module LinkedList
       nil
     end
 
-    # @todo #to_s
+    # Returns the Linked List object as strings
+    # @return [String] a string representation of the Linked List object
+    # @since 1.0.7
+    # @version 1.0.0
+    def to_s
+      return 'nil' if head.nil?
+
+      str = ''
+      current = head
+      until current.nil?
+        str += "( #{current.value} ) -> "
+        current = current.next_node
+      end
+      "#{str}nil"
+    end
+
     # @todo #insert_at(value, index)
     # @todo #remove_at(index)
 
