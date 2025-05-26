@@ -4,7 +4,7 @@ require_relative 'node'
 
 module LinkedList
   # Linked List Class
-  # @version 1.0.7
+  # @version 1.0.8
   class LinkedList
     attr_accessor :head
 
@@ -15,6 +15,7 @@ module LinkedList
     end
 
     # Adds a new node containing `value` to the end of the list
+    # @param value [LinkedList::Node] a node object
     # @since 1.0.0
     # @version 1.0.1
     def append(value)
@@ -27,6 +28,7 @@ module LinkedList
     end
 
     # Adds a new node containing `value` to the start of the list
+    # @param value [LinkedList::Node] a node object
     # @since 1.0.1
     # @version 1.0.0
     def prepend(value)
@@ -156,7 +158,25 @@ module LinkedList
       "#{str}nil"
     end
 
-    # @todo #insert_at(value, index)
+    # Inserts a new node with the provided `value` at the given `index`
+    # @param value [LinkedList::Node] a node object
+    # @param index [Integer] node position to insert
+    # @since 1.0.8
+    # @version 1.0.0
+    def insert_at(value, index)
+      return prepend(value) if index.zero?
+
+      count = 0
+      current = head
+      until current.next_node.nil? || count == index - 1
+        current = current.next_node
+        count += 1
+      end
+      new_node = Node.new(value)
+      new_node.next_node = current.next_node
+      current.next_node = new_node
+    end
+
     # @todo #remove_at(index)
 
     private

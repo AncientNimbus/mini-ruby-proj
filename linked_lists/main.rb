@@ -14,7 +14,9 @@ list.prepend('bean')
 list.prepend('toast')
 
 # p list.head
-p list.head
+p list.at(2, 0)
+# p list.to_s
+# list.insert_at('Shiba Inu', 2)
 p list.to_s
 # p list.tail_node
 # puts list.to_s
