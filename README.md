@@ -23,6 +23,8 @@
 - Fibonacci Sequence
 - Merge Sort
 
+## 6. [Linked list](https://github.com/AncientNimbus/mini-ruby-proj/tree/main/linked_lists)
+
 
 
 ## Additional info
