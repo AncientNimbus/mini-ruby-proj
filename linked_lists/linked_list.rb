@@ -145,10 +145,8 @@ module LinkedList
     # Returns the Linked List object as strings
     # @return [String] a string representation of the Linked List object
     # @since 1.0.7
-    # @version 1.0.0
+    # @version 1.0.1
     def to_s
-      return 'nil' if head.nil?
-
       str = ''
       current = head
       until current.nil?
