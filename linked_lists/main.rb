@@ -13,5 +13,6 @@ list.append('turtle')
 list.prepend('bean')
 list.prepend('toast')
 
-p list.head
+# p list.head
+p list.size
 # puts list.to_s
