@@ -23,9 +23,9 @@
 - Fibonacci Sequence
 - Merge Sort
 
-## 6. [Linked list](https://github.com/AncientNimbus/mini-ruby-proj/tree/main/linked_lists)
+## 6. [Linked list](https://github.com/AncientNimbus/mini-ruby-proj/tree/main/linked-lists)
 
-
+## 7. [Hashed Map](https://github.com/AncientNimbus/mini-ruby-proj/tree/main/hash-map)
 
 ## Additional info
 
