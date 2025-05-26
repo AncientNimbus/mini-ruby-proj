@@ -4,7 +4,7 @@ require_relative 'node'
 
 module LinkedList
   # Linked List Class
-  # @version 1.0.5
+  # @version 1.0.6
   class LinkedList
     attr_accessor :head
 
@@ -120,7 +120,26 @@ module LinkedList
       current.value == value
     end
 
-    # @todo #find(value)
+    # Returns the index of the node containing value, or `nil` if not found
+    # @return [Integer, nil] the index position of the node object, or `nil if not found
+    # @since 1.0.6
+    # @version 1.0.0
+    def find(value)
+      return nil if head.nil?
+
+      count = 0
+      current = head
+      return count if current.value == value
+
+      until current.next_node.nil? || current.value == value
+        current = current.next_node
+        count += 1
+      end
+      return count if current.value == value
+
+      nil
+    end
+
     # @todo #to_s
     # @todo #insert_at(value, index)
     # @todo #remove_at(index)

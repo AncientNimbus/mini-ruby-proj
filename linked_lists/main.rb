@@ -15,6 +15,6 @@ list.prepend('toast')
 
 # p list.head
 p list.head
-p list.contains?('turtle')
+p list.find('turtle')
 # p list.tail_node
 # puts list.to_s
