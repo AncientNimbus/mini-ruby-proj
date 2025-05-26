@@ -2,6 +2,7 @@
 
 module LinkedList
   # Node Class
+  # @since 1.0.0
   # @version 1.0.0
   class Node
     attr_accessor :value, :next_node

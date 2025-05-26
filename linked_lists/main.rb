@@ -10,6 +10,8 @@ list.append('parrot')
 list.append('hamster')
 list.append('snake')
 list.append('turtle')
+list.prepend('bean')
+list.prepend('toast')
 
 p list.head
 # puts list.to_s

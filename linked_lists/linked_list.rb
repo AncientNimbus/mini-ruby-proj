@@ -4,7 +4,7 @@ require_relative 'node'
 
 module LinkedList
   # Linked List Class
-  # @version 1.0.0
+  # @version 1.0.1
   class LinkedList
     attr_accessor :head, :tail
 
@@ -14,6 +14,8 @@ module LinkedList
     end
 
     # Adds a new node containing `value` to the end of the list
+    # @since 1.0.0
+    # @version 1.0.0
     def append(value)
       if head.nil?
         self.head = Node.new(value)
@@ -23,7 +25,16 @@ module LinkedList
         current.next_node = Node.new(value)
       end
     end
-    # @todo #prepend(value)
+
+    # Adds a new node containing `value` to the start of the list
+    # @since 1.0.1
+    # @version 1.0.0
+    def prepend(value)
+      old_head = head
+      self.head = Node.new(value)
+      head.next_node = old_head
+    end
+
     # @todo #size
     # @todo #head
     # @todo #tail
