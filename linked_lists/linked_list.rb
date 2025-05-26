@@ -4,7 +4,7 @@ require_relative 'node'
 
 module LinkedList
   # Linked List Class
-  # @version 1.0.8
+  # @version 1.0.9
   class LinkedList
     attr_accessor :head
 
@@ -177,7 +177,27 @@ module LinkedList
       current.next_node = new_node
     end
 
-    # @todo #remove_at(index)
+    # rubocop:disable Metrics/MethodLength
+    # Remove the node at the given `index`
+    # @param index [Integer] node position to remove
+    # @since 1.0.9
+    # @version 1.0.0
+    def remove_at(index)
+      return if head.nil?
+      return self.head = head.next_node if index.zero?
+
+      count = 0
+      prev = nil
+      current = head
+      until current.nil? || count == index
+        prev = current
+        current = current.next_node
+        count += 1
+      end
+
+      prev.next_node = current.next_node if current
+    end
+    # rubocop:enable Metrics/MethodLength
 
     private
 
