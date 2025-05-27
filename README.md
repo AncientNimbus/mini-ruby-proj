@@ -25,6 +25,24 @@
 
 ## 6. [Linked list](https://github.com/AncientNimbus/mini-ruby-proj/tree/main/linked-lists)
 
+- `LinkedList::Node` class
+- `LinkedList::LinkedList` class
+
+  Core functions:
+
+  - `append(value)`
+  - `prepend(value)`
+  - `size`
+  - `head_node`
+  - `tail_node`
+  - `at(index)`
+  - `pop`
+  - `contains?(value)`
+  - `find(value)`
+  - `to_s`
+  - `insert_at(value, index)`
+  - `remove_at(index)`
+
 ## 7. [Hash Map](https://github.com/AncientNimbus/mini-ruby-proj/tree/main/hash-map)
 
 ## Additional info
