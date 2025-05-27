@@ -6,7 +6,7 @@ require_relative '../linked-lists/node'
 # HashMap Module
 module HashMap
   # HashMap Class
-  # @version 1.0.1
+  # @version 1.0.2
   class HashMap
     attr_accessor :capacity, :buckets
     attr_reader :load_factor
@@ -36,11 +36,10 @@ module HashMap
     # @param key [String] a String as key value
     # @param value [Object]
     # @since 1.0.1
-    # @version 1.0.0
+    # @version 1.0.1
     def set(key, value)
-      bucket_idx = hash(key) % capacity
+      list = bucket(key)
       data = [key, value]
-      list = buckets[bucket_idx]
 
       current_node = list.head_node
       while current_node
@@ -52,6 +51,22 @@ module HashMap
     end
 
     # @todo #get(key)
+    # Returns the value that is assigned to this key, returns `nil` if key not found.
+    # @param key [String] a String as key value
+    # @since 1.0.2
+    # @version 1.0.0
+    def get(key)
+      list = bucket(key)
+
+      current_node = list.head_node
+      while current_node
+        return current_node.value[1] if current_node.value[0] == key
+
+        current_node = current_node.next_node
+      end
+      nil
+    end
+
     # @todo #has?(key)
     # @todo #remove(key)
     # @todo #length
@@ -59,6 +74,28 @@ module HashMap
     # @todo #keys
     # @todo #values
     # @todo #entries
+    private
+
+    # Convert String key value to bucket index.
+    # @param key [String] a String as key value
+    # @return [Integer] converted hash key
+    # @since 1.0.2
+    # @version 1.0.0
+    def to_idx(key)
+      hash(key) % capacity
+    end
+
+    # Takes a String key value and returns bucket's linked list object.
+    # @param key [String] a String as key value
+    # @return [LinkedList::LinkedList]
+    # @since 1.0.2
+    # @version 1.0.0
+    def bucket(key)
+      bucket_idx = to_idx(key)
+      raise IndexError if bucket_idx.negative? || bucket_idx >= buckets.length
+
+      buckets[bucket_idx]
+    end
   end
 end
 
