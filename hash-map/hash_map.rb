@@ -6,7 +6,7 @@ require_relative '../linked-lists/node'
 # HashMap Module
 module HashMap
   # HashMap Class
-  # @version 1.0.6
+  # @version 1.0.7
   class HashMap
     attr_accessor :capacity, :buckets
     attr_reader :load_factor
@@ -101,7 +101,7 @@ module HashMap
       nil
     end
 
-    # Returns the number of stored keys in the hash map
+    # Returns the number of stored keys in the hash map.
     # @return [Integer] number of keys
     # @since 1.0.4
     # @version 1.0.0
@@ -116,39 +116,38 @@ module HashMap
       self.buckets = Array.new(capacity) { LList.new }
     end
 
-    # Returns an array containing all the keys inside the hash map
+    # Returns an array containing all the keys inside the hash map.
     # @return [Array<String>] an array of keys
     # @since 1.0.6
-    # @version 1.0.0
+    # @version 1.0.1
     def keys
-      buckets.flat_map do |bucket|
-        current_node = bucket.head_node
-        keys_val = []
-        while current_node
-          keys_val << current_node.value[0]
-          current_node = current_node.next_node
-        end
-        keys_val
-      end
+      entries.map { |elem| elem[0] }
     end
 
-    # Returns an array containing all the values inside the hash map
+    # Returns an array containing all the values inside the hash map.
     # @return [Array<Object>] an array of values
     # @since 1.0.6
-    # @version 1.0.0
+    # @version 1.0.1
     def values
+      entries.map { |elem| elem[1] }
+    end
+
+    # Returns an array that contains each `[key, value]` pair.
+    # @return [Array<Array<String, Object>>] an array of values
+    # @since 1.0.7
+    # @version 1.0.0
+    def entries
       buckets.flat_map do |bucket|
         current_node = bucket.head_node
         values = []
         while current_node
-          values << current_node.value[1]
+          values << current_node.value
           current_node = current_node.next_node
         end
         values
       end
     end
 
-    # @todo #entries
     private
 
     # Convert String key value to bucket index.

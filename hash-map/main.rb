@@ -17,5 +17,6 @@ p test.length
 # test.clear
 p test.keys
 p test.values
+p test.entries
 # p test.set('Spock', 'Live long and prosper')
 # p test.set('Picard', 'Earl Grey, Hot')
