@@ -6,13 +6,13 @@ require_relative '../linked-lists/node'
 # HashMap Module
 module HashMap
   # HashMap Class
-  # @version 1.0.7
+  # @version 1.0.8
   class HashMap
     attr_accessor :capacity, :buckets
     attr_reader :load_factor
 
     def initialize
-      @load_factor = 0.8
+      @load_factor = 0.75
       @capacity = 16
       @buckets = Array.new(capacity) { LList.new }
     end
@@ -36,7 +36,7 @@ module HashMap
     # @param key [String] a String as key value
     # @param value [Object]
     # @since 1.0.1
-    # @version 1.0.1
+    # @version 1.0.2
     def set(key, value)
       list = bucket(key)
       data = [key, value]
@@ -48,6 +48,7 @@ module HashMap
         current_node = current_node.next_node
       end
       list.append(data)
+      expand_buckets
     end
 
     # Returns the value that is assigned to this key, returns `nil` if key not found.
@@ -111,8 +112,9 @@ module HashMap
 
     # Removes all entries in the hash map
     # @since 1.0.5
-    # @version 1.0.0
+    # @version 1.0.1
     def clear
+      self.capacity = 16
       self.buckets = Array.new(capacity) { LList.new }
     end
 
@@ -169,6 +171,21 @@ module HashMap
       raise IndexError if bucket_idx.negative? || bucket_idx >= buckets.length
 
       buckets[bucket_idx]
+    end
+
+    # Expand buckets capacity when buckets size exceed load factor
+    # @since 1.0.8
+    # @version 1.0.0
+    def expand_buckets
+      buckets_size = length
+      return if buckets_size.zero? || buckets_size / capacity.to_f < load_factor
+
+      old_entries = entries
+
+      self.capacity *= 2
+      self.buckets = Array.new(capacity) { LList.new }
+
+      old_entries.each { |k, v| set(k, v) }
     end
   end
 end
