@@ -6,7 +6,7 @@ require_relative '../linked-lists/node'
 # HashMap Module
 module HashMap
   # HashMap Class
-  # @version 1.0.8
+  # @version 1.0.9
   class HashMap
     attr_accessor :capacity, :buckets
     attr_reader :load_factor
@@ -135,18 +135,18 @@ module HashMap
     end
 
     # Returns an array that contains each `[key, value]` pair.
-    # @return [Array<Array<String, Object>>] an array of values
+    # @return [Array<Array<String, Object>>] an array of entries
     # @since 1.0.7
-    # @version 1.0.0
+    # @version 1.0.1
     def entries
       buckets.flat_map do |bucket|
         current_node = bucket.head_node
-        values = []
+        data = []
         while current_node
-          values << current_node.value
+          data << current_node.value
           current_node = current_node.next_node
         end
-        values
+        data
       end
     end
 
