@@ -6,7 +6,7 @@ require_relative '../linked-lists/node'
 # HashMap Module
 module HashMap
   # HashMap Class
-  # @version 1.0.2
+  # @version 1.0.3
   class HashMap
     attr_accessor :capacity, :buckets
     attr_reader :load_factor
@@ -50,15 +50,12 @@ module HashMap
       list.append(data)
     end
 
-    # @todo #get(key)
     # Returns the value that is assigned to this key, returns `nil` if key not found.
     # @param key [String] a String as key value
     # @since 1.0.2
-    # @version 1.0.0
+    # @version 1.0.1
     def get(key)
-      list = bucket(key)
-
-      current_node = list.head_node
+      current_node = bucket(key).head_node
       while current_node
         return current_node.value[1] if current_node.value[0] == key
 
@@ -67,8 +64,44 @@ module HashMap
       nil
     end
 
-    # @todo #has?(key)
+    # Returns `true` or `false` based on whether or not the key is in the hash map.
+    # @param key [String] a String as key value
+    # @return [Boolean] returns true if key is in the hash
+    # @since 1.0.3
+    # @version 1.0.0
+    def has?(key)
+      current_node = bucket(key).head_node
+      while current_node
+        return true if current_node.value[0] == key
+
+        current_node = current_node.next_node
+      end
+      false
+    end
+
     # @todo #remove(key)
+    # Deletes and returns a value in the hash if the given key is in the hash, else returns `nil`.
+    # @param key [String] a String as key value
+    # @return [Object, nil] returns the deleted value or nil
+    # @since 1.0.3
+    # @version 1.0.0
+    def remove(key)
+      list = bucket(key)
+
+      current_node = list.head_node
+      count = 0
+      while current_node
+        if current_node.value[0] == key
+          value = current_node.value[1]
+          list.remove_at(count)
+          return value
+        end
+        current_node = current_node.next_node
+        count += 1
+      end
+      nil
+    end
+
     # @todo #length
     # @todo #clear
     # @todo #keys
@@ -87,7 +120,7 @@ module HashMap
 
     # Takes a String key value and returns bucket's linked list object.
     # @param key [String] a String as key value
-    # @return [LinkedList::LinkedList]
+    # @return [LinkedList::LinkedList] a linked list object
     # @since 1.0.2
     # @version 1.0.0
     def bucket(key)
@@ -101,6 +134,3 @@ end
 
 # Alias for HashMap::HashMap
 HMHash = HashMap::HashMap
-
-# snippet to use
-#   raise IndexError if index.negative? || index >= @buckets.length
