@@ -14,5 +14,8 @@ p test.get('Harry')
 # p test.remove('Spock')
 p test.has?('Spock')
 p test.length
+test.clear
+p test
+p test.length
 # p test.set('Spock', 'Live long and prosper')
 # p test.set('Picard', 'Earl Grey, Hot')

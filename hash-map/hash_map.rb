@@ -6,7 +6,7 @@ require_relative '../linked-lists/node'
 # HashMap Module
 module HashMap
   # HashMap Class
-  # @version 1.0.4
+  # @version 1.0.5
   class HashMap
     attr_accessor :capacity, :buckets
     attr_reader :load_factor
@@ -109,7 +109,13 @@ module HashMap
       buckets.inject(0) { |count, bucket| count + bucket.size }
     end
 
-    # @todo #clear
+    # Removes all entries in the hash map
+    # @since 1.0.5
+    # @version 1.0.0
+    def clear
+      self.buckets = Array.new(capacity) { LList.new }
+    end
+
     # @todo #keys
     # @todo #values
     # @todo #entries
