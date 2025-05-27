@@ -6,7 +6,7 @@ require_relative '../linked-lists/node'
 # HashMap Module
 module HashMap
   # HashMap Class
-  # @version 1.0.3
+  # @version 1.0.4
   class HashMap
     attr_accessor :capacity, :buckets
     attr_reader :load_factor
@@ -14,7 +14,7 @@ module HashMap
     def initialize
       @load_factor = 0.8
       @capacity = 16
-      @buckets = Array.new(capacity, LList.new)
+      @buckets = Array.new(capacity) { LList.new }
     end
 
     # Take a key and produces a hash code with it.
@@ -79,7 +79,6 @@ module HashMap
       false
     end
 
-    # @todo #remove(key)
     # Deletes and returns a value in the hash if the given key is in the hash, else returns `nil`.
     # @param key [String] a String as key value
     # @return [Object, nil] returns the deleted value or nil
@@ -102,7 +101,14 @@ module HashMap
       nil
     end
 
-    # @todo #length
+    # Returns the number of stored keys in the hash map
+    # @return [Integer] number of keys
+    # @since 1.0.4
+    # @version 1.0.0
+    def length
+      buckets.inject(0) { |count, bucket| count + bucket.size }
+    end
+
     # @todo #clear
     # @todo #keys
     # @todo #values
