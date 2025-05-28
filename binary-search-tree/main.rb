@@ -28,9 +28,18 @@ tree.pretty_print
 
 # Test delete
 # tree.delete(7000)
-tree.delete(8)
+# tree.delete(8)
 # tree.delete(7)
-tree.delete(67)
+# tree.delete(67)
 # p tree.delete(1)
 
+# Test find
+# p tree.find(23)
+
+# Test level order
+# tree.level_order { |node| puts node.value }
+p tree.level_order
+
 tree.pretty_print
+
+# p data.select

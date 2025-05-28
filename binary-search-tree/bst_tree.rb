@@ -7,7 +7,7 @@ Node = BST::Node
 
 module BST
   # BST Class
-  # @version 1.0.1
+  # @version 1.0.2
   class BST
     attr_accessor :root
 
@@ -83,8 +83,39 @@ module BST
       end
       node
     end
-    # @todo #find
-    # @todo #level_order
+
+    # Takes a value and returns the node with the given value.
+    # @param value [Object] a value to search
+    # @since 1.0.2
+    # @version 1.0.0
+    def find(value)
+      current_node = root
+      until current_node.nil?
+        return current_node if current_node.value == value
+
+        current_node = current_node.value > value ? current_node.left : current_node.right
+      end
+      nil
+    end
+
+    # Returns an array of values via the breadth-first method
+    # @since 1.0.2
+    # @version 1.0.0
+    def level_order(&)
+      return to_enum(:level_order) unless block_given?
+
+      queue = [root]
+
+      until queue.empty?
+        current = queue.shift
+        yield current
+
+        queue << current.left if current.left
+        queue << current.right if current.right
+
+      end
+    end
+
     # @todo #inorder
     # @todo #preorder
     # @todo #postorder
