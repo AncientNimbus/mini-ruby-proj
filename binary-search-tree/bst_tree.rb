@@ -7,7 +7,7 @@ Node = BST::Node
 
 module BST
   # BST Class
-  # @version 1.0.2
+  # @version 1.0.3
   class BST
     attr_accessor :root
 
@@ -116,9 +116,41 @@ module BST
       end
     end
 
-    # @todo #inorder
-    # @todo #preorder
-    # @todo #postorder
+    # Returns an array of values via the in-order order
+    # @since 1.0.3
+    # @version 1.0.0
+    def inorder(node = root, &)
+      return to_enum(:inorder, node) unless block_given?
+      return if node.nil?
+
+      inorder(node.left, &)
+      yield node
+      inorder(node.right, &)
+    end
+
+    # Returns an array of values via the pre-order order
+    # @since 1.0.3
+    # @version 1.0.0
+    def preorder(node = root, &)
+      to_enum(:preorder, node) unless block_given?
+      return if node.nil?
+
+      yield node
+      preorder(node.left, &)
+      preorder(node.right, &)
+    end
+
+    # Returns an array of values via the post-order order
+    # @since 1.0.3
+    # @version 1.0.0
+    def postorder(node = root, &)
+      to_enum(:postorder, node) unless block_given?
+      return if node.nil?
+
+      postorder(node.left, &)
+      postorder(node.right, &)
+      yield node
+    end
     # @todo #height
     # @todo #depth
     # @todo #balanced

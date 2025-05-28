@@ -38,8 +38,19 @@ tree.pretty_print
 
 # Test level order
 # tree.level_order { |node| puts node.value }
-p tree.level_order
+# p tree.level_order
+
+# Test Inorder
+# tree.inorder { |node| puts node.value }
+# enum_test = tree.inorder
+# enum_test.each { |elem| puts elem.value }
+
+# Test Preorder
+# tree.preorder { |node| puts node.value }
+# tree.preorder
+
+# Test Postorder
+tree.postorder { |node| puts node.value }
+# tree.postorder
 
 tree.pretty_print
-
-# p data.select
