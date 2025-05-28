@@ -7,8 +7,7 @@ Node = BST::Node
 
 module BST
   # BST Class
-  # @since 1.0.0
-  # @version 1.0.0
+  # @version 1.0.1
   class BST
     attr_accessor :root
 
@@ -42,8 +41,48 @@ module BST
       pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", is_left: true) if node.left
     end
 
-    # @todo #insert
-    # @todo #delete
+    # Insert new node when a leaf node is found, return root if a duplicate is found.
+    # @param value [Object] a value for the node object
+    # @since 1.0.1
+    # @version 1.0.0
+    def insert(value)
+      new_node = Node.new(value)
+      parent = nil
+      current_node = root
+      until current_node.nil?
+        return root if new_node == current_node
+
+        parent = current_node
+        current_node = current_node > new_node ? current_node.left : current_node.right
+      end
+      parent < new_node ? parent.right = new_node : parent.left = new_node
+      root
+    end
+
+    # Takes a value and delete the node if found.
+    # @param value [Object] a value for the node object
+    # @since 1.0.1
+    # @version 1.0.0
+    def delete(value, node = root)
+      return if node.nil?
+
+      if node.value > value
+        node.left = delete(value, node.left)
+      elsif node.value < value
+        node.right = delete(value, node.right)
+      else
+        # When left branch is empty, return the right branch.
+        return node.right if node.left.nil?
+        # When right branch is empty, return the left branch.
+        return node.left if node.right.nil?
+
+        # When both children are present
+        next_node = get_successor(node)
+        node.value = next_node.value
+        node.right = delete(next_node.value, node.right)
+      end
+      node
+    end
     # @todo #find
     # @todo #level_order
     # @todo #inorder
@@ -62,6 +101,14 @@ module BST
     # @version v1.0.0
     def preprocess_data(data)
       data.sort.uniq
+    end
+
+    # Get successor (only when right is not empty)
+    # @version v1.0.0
+    def get_successor(current_node)
+      current_node = current_node.right
+      current_node = current_node.left until current_node.left.nil?
+      current_node
     end
   end
 end
