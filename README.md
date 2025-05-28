@@ -45,6 +45,8 @@
 
 ## 7. [Hash Map](https://github.com/AncientNimbus/mini-ruby-proj/tree/main/hash-map)
 
+## 8. [Binary Search Tree](https://github.com/AncientNimbus/mini-ruby-proj/tree/main/binary-search-tree)
+
 ## Additional info
 
 - [Ruby | The Odin Project](https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby#a-bit-of-computer-science)
