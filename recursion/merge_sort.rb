@@ -17,6 +17,8 @@ module MergeSort
       merge(left_sorted, right_sorted)
     end
 
+    private
+
     # Helper method
     # @param left [Array<Integer>]
     # @param right [Array<Integer>]
