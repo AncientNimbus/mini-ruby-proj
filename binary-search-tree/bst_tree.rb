@@ -7,7 +7,7 @@ Node = BST::Node
 
 module BST
   # BST Class
-  # @version 1.0.3
+  # @version 1.0.4
   class BST
     attr_accessor :root
 
@@ -151,8 +151,39 @@ module BST
       postorder(node.right, &)
       yield node
     end
+
     # @todo #height
-    # @todo #depth
+    # Returns the height of the node containing that value.
+    # @param value [Object] a value to search
+    # @since 1.0.4
+    # @version 1.0.0
+    def height(value)
+      current_node = root
+      until current_node.nil?
+        return cal_height(current_node) if current_node.value == value
+
+        current_node = current_node.value > value ? current_node.left : current_node.right
+      end
+
+      nil
+    end
+
+    # Returns the depth of the node containing that value.
+    # @param value [Object] a value to search
+    # @since 1.0.4
+    # @version 1.0.0
+    def depth(value)
+      current_node = root
+      count = 0
+      until current_node.nil?
+        return count if current_node.value == value
+
+        current_node = current_node.value > value ? current_node.left : current_node.right
+        count += 1
+      end
+      nil
+    end
+
     # @todo #balanced
     # @todo #rebalance
 
@@ -172,6 +203,15 @@ module BST
       current_node = current_node.right
       current_node = current_node.left until current_node.left.nil?
       current_node
+    end
+
+    def cal_height(node)
+      return -1 if node.nil?
+
+      left_height = cal_height(node.left)
+      right_height = cal_height(node.right)
+
+      1 + [left_height, right_height].max
     end
   end
 end

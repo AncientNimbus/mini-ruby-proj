@@ -50,7 +50,17 @@ tree.pretty_print
 # tree.preorder
 
 # Test Postorder
-tree.postorder { |node| puts node.value }
+# tree.postorder { |node| puts node.value }
 # tree.postorder
+
+# Test height
+p tree.height(1)
+
+# Test depth
+# p tree.depth(1)
+
+# Test balanced
+
+# Test rebalance
 
 tree.pretty_print
