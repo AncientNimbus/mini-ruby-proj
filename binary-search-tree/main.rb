@@ -21,9 +21,9 @@ tree = BTree.new(data)
 tree.pretty_print
 
 # Test insert
-# tree.insert(6)
-# tree.insert(2000)
-# tree.insert(2.2)
+tree.insert(6)
+tree.insert(2000)
+tree.insert(2.2)
 # tree.insert(2.2)
 
 # Test delete
@@ -54,13 +54,17 @@ tree.pretty_print
 # tree.postorder
 
 # Test height
-p tree.height(1)
+p tree.height(4)
 
 # Test depth
 # p tree.depth(1)
 
-# Test balanced
+# Test balanced?
+p tree.balanced?
 
 # Test rebalance
+tree.pretty_print
+tree.rebalance
+p tree.balanced?
 
 tree.pretty_print

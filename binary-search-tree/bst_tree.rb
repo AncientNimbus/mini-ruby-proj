@@ -7,7 +7,7 @@ Node = BST::Node
 
 module BST
   # BST Class
-  # @version 1.0.4
+  # @version 1.0.5
   class BST
     attr_accessor :root
 
@@ -152,20 +152,13 @@ module BST
       yield node
     end
 
-    # @todo #height
     # Returns the height of the node containing that value.
     # @param value [Object] a value to search
     # @since 1.0.4
-    # @version 1.0.0
+    # @version 1.0.1
     def height(value)
-      current_node = root
-      until current_node.nil?
-        return cal_height(current_node) if current_node.value == value
-
-        current_node = current_node.value > value ? current_node.left : current_node.right
-      end
-
-      nil
+      current_node = find(value)
+      current_node.value == value ? cal_height(current_node) : nil
     end
 
     # Returns the depth of the node containing that value.
@@ -184,8 +177,22 @@ module BST
       nil
     end
 
-    # @todo #balanced
-    # @todo #rebalance
+    # Checks if the tree is balanced
+    # @since 1.0.5
+    # @version 1.0.0
+    def balanced?(node = root)
+      return true if node.nil?
+
+      (cal_height(node.left) - cal_height(node.right)).abs <= 1 && balanced?(node.left) && balanced?(node.right)
+    end
+
+    # Rebalances an unbalanced tree
+    # @since 1.0.5
+    # @version 1.0.0
+    def rebalance
+      arr = inorder.map(&:value)
+      self.root = build_tree(arr)
+    end
 
     private
 
@@ -205,13 +212,11 @@ module BST
       current_node
     end
 
+    # Helper to recusively calculate the height of a given node
     def cal_height(node)
       return -1 if node.nil?
 
-      left_height = cal_height(node.left)
-      right_height = cal_height(node.right)
-
-      1 + [left_height, right_height].max
+      1 + [cal_height(node.left), cal_height(node.right)].max
     end
   end
 end
