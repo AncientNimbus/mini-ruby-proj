@@ -19,14 +19,13 @@ module KnightTravails
       journey.each do |coord|
         case coord
         in [Integer => row, Integer => col] if row.between?(0, 7) && col.between?(0, 7)
-          # Valid coordinate
+          # Valid coordinate - skip
         else
           raise ArgumentError, 'Invalid coordinate format: expected [row, col] with values 0-7'
         end
       end
 
-      pos1, pos2 = journey.map { |e| to_pos(e) }
-      pathfinder(pos1, pos2)
+      pathfinder(*journey.map { |e| to_pos(e) })
     end
 
     private
@@ -37,26 +36,26 @@ module KnightTravails
       visited = Set[pos1]
 
       until queue.empty?
-        current, move, path = queue.shift
-        return format_result(current, move, path) if current == pos2
+        current = queue.shift
+        return format_result(*current) if current[0] == pos2
 
-        explore_moves(current, move, path, queue, visited)
+        explore_moves(*current, queue, visited)
       end
     end
 
     # Helper: Access each cell and explore all valid options.
-    def explore_moves(current, move, path, queue, visited)
-      valid_moves[current].each_with_index do |pos, idx|
+    def explore_moves(cell_pos, move, path, queue, visited)
+      valid_moves[cell_pos].each_with_index do |pos, idx|
         next unless pos == 1 && !visited.include?(idx)
 
         visited.add(idx)
-        queue << [idx, move + 1, path + [current]]
+        queue << [idx, move + 1, path + [cell_pos]]
       end
     end
 
     # Helper: Format data and print the shortest path from point A to point B.
-    def format_result(target, move, path)
-      path << target
+    def format_result(cell_pos, move, path)
+      path << cell_pos
       path.map! { |e| to_coord(e) }
       puts <<~OUTPUT
         You made it in #{move} #{move > 1 ? 'moves' : 'move'}!
