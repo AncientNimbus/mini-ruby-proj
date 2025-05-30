@@ -15,7 +15,17 @@ module KnightTravails
 
     # Find the fastest valid path from one coordinate to another.
     def moves(coord1, coord2)
-      pos1, pos2 = [coord1, coord2].map { |e| to_pos(e) }
+      journey = [coord1, coord2]
+      journey.each do |coord|
+        case coord
+        in [Integer => row, Integer => col] if row.between?(0, 7) && col.between?(0, 7)
+          # Valid coordinate
+        else
+          raise ArgumentError, 'Invalid coordinate format: expected [row, col] with values 0-7'
+        end
+      end
+
+      pos1, pos2 = journey.map { |e| to_pos(e) }
       pathfinder(pos1, pos2)
     end
 

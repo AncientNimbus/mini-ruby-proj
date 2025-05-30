@@ -9,3 +9,5 @@ knight = KnightTravails::Knight.new
 # knight.moves([0, 0], [0, 0])
 # knight.moves([0, 0], [1, 1])
 knight.moves([0, 0], [7, 7])
+
+# knight.moves(1, 2) #=> Expects to throw an error
