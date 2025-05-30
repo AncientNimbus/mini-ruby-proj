@@ -94,6 +94,11 @@
 
 </details>
 
+## 9. [Knights Travails](https://github.com/AncientNimbus/mini-ruby-proj/tree/main/knights-travails)
+
+- Opted to use adjacency matrix
+- Search algorithm: BFS
+
 ## Additional info
 
 - [Ruby | The Odin Project](https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby#a-bit-of-computer-science)
