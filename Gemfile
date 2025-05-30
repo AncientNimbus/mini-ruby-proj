@@ -11,3 +11,5 @@ gem 'rubocop-performance', '~> 1.25', require: false
 gem 'yard', '~> 0.9.37'
 
 gem 'colorize', '~> 1.1'
+
+gem 'rspec', '~> 3.13'
