@@ -2,4 +2,4 @@
 
 require_relative 'caesar_cipher'
 
-CaesarCipher.new
+CaesarCipher.new.main

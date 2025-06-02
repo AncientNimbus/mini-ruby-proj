@@ -28,10 +28,6 @@ class CaesarCipher
   }.freeze
   at_exit { puts "\nThank you for using the Cipher. :)" }
 
-  def initialize
-    main
-  end
-
   # Helper methods: Shift character space
   # @param char [String] single character
   # @param shift [Integer] shift factor
