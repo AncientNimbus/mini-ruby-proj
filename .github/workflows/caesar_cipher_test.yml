@@ -1,0 +1,39 @@
+name: Ruby Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        ruby-version: ['3.0', '3.1', '3.2', '3.3', '3.4']
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Ruby ${{ matrix.ruby-version }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true 
+        
+    - name: Bundle install
+      run: gem install rspec
+    
+    - name: Run RSpec tests for Caesar Cipher
+      run: rspec caesar_cipher/spec/caesar_cipher_spec.rb
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: rspec-results-${{ matrix.ruby-version }}
+        path: |
+          spec/
+          *.log
