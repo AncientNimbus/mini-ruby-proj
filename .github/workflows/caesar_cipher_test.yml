@@ -24,13 +24,13 @@ jobs:
         bundler-cache: true 
         
     - name: Bundle install
-      run: gem install rspec
+      run: bundle install
     
     - name: Run RSpec tests for Caesar Cipher
       run: rspec caesar_cipher/spec/caesar_cipher_spec.rb
     
     - name: Upload test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: rspec-results-${{ matrix.ruby-version }}
