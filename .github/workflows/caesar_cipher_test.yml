@@ -35,5 +35,5 @@ jobs:
       with:
         name: rspec-results-${{ matrix.ruby-version }}
         path: |
-          spec/
+          caesar-cipher/spec
           *.log
