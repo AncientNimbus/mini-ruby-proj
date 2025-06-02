@@ -93,15 +93,78 @@ describe CaesarCipher do
     end
   end
 
-  describe '#main' do
-    # script method
-  end
-
-  describe '#user_input' do
-    # script method
-  end
-
   describe '#get_input' do
-    # query method
+    context 'mode selection: with valid input provided during first entry' do
+      let(:regex) { /\A[1-2]\z/ }
+      let(:prompt_msg) { 'Please provide a mode number (1 or 2)...' }
+
+      before do
+        allow(caesar_cipher).to receive(:puts)
+        allow(caesar_cipher).to receive(:gets).and_return('1')
+      end
+      it 'prompts the user with the correct message' do
+        expect(caesar_cipher).to receive(:puts).with("\n* Please provide a mode number (1 or 2)...")
+        caesar_cipher.get_input(regex, prompt_msg)
+      end
+
+      it 'returns 1 when user enter 1' do
+        result = caesar_cipher.get_input(regex, prompt_msg)
+        expect(result).to eq('1')
+      end
+    end
+
+    context 'get message: with valid input provided during first entry' do
+      let(:regex) { /.*/ }
+      let(:prompt_msg) { 'Please provide a message...' }
+
+      before do
+        allow(caesar_cipher).to receive(:puts)
+        allow(caesar_cipher).to receive(:gets).and_return('USS-Enterprise')
+      end
+      it 'prompts the user with the correct message' do
+        expect(caesar_cipher).to receive(:puts).with("\n* Please provide a message...")
+        caesar_cipher.get_input(regex, prompt_msg)
+      end
+
+      it 'returns USS-Enterprise when user enter USS-Enterprise' do
+        result = caesar_cipher.get_input(regex, prompt_msg)
+        expect(result).to eq('USS-Enterprise')
+      end
+    end
+
+    context 'shift input: with valid input provided during first entry' do
+      let(:regex) { /\A[0-9]*\z/ }
+      let(:prompt_msg) { 'Enter a number to set the character shift...' }
+
+      before do
+        allow(caesar_cipher).to receive(:puts)
+        allow(caesar_cipher).to receive(:gets).and_return('26')
+      end
+      it 'prompts the user with the correct message' do
+        expect(caesar_cipher).to receive(:puts).with("\n* Enter a number to set the character shift...")
+        caesar_cipher.get_input(regex, prompt_msg)
+      end
+
+      it 'returns 26 when user enter 26' do
+        result = caesar_cipher.get_input(regex, prompt_msg)
+        expect(result).to eq('26')
+      end
+    end
+
+    context 'when user types exit' do
+      let(:regex) { /.*/ }
+      let(:prompt_msg) { 'Please provide a message...' }
+
+      before do
+        allow(caesar_cipher).to receive(:puts)
+        allow(caesar_cipher).to receive(:gets).and_return('exit')
+        allow(caesar_cipher).to receive(:exit)
+      end
+
+      it 'calls exit' do
+        expect(caesar_cipher).to receive(:exit)
+        caesar_cipher.get_input(regex, prompt_msg)
+      end
+    end
   end
 end
